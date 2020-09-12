@@ -2,9 +2,16 @@ import time
 import pandas as pd
 import numpy as np
 
+<<<<<<< HEAD
 
 #This is the code related to the second project of the nanodegree
 
+||||||| ccecc35
+=======
+
+#Project bikeshare created in August 2020
+
+>>>>>>> refactoring
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
@@ -12,6 +19,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
+    Interact with the user for the first time running the program
 
     Returns:
         (str) city - name of the city to analyze
