@@ -12,6 +12,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
+    Interact with the user for the first time running the program
 
     Returns:
         (str) city - name of the city to analyze
