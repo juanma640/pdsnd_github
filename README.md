@@ -2,10 +2,10 @@
 README file created  12/09/2020
 
 ### Project Title
-Replace the Project Title
+Final Git Project
 
 ### Description
-Describe what your project is about and what it does
+Project related to version control using Git
 
 ### Files used
 Include the files used

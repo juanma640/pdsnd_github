@@ -2,6 +2,9 @@ import time
 import pandas as pd
 import numpy as np
 
+
+#This is the code related to the second project of the nanodegree
+
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
@@ -16,9 +19,9 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    
+
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    
+
     user_city_input = input("Please select a city between New York City, Washington and Chicago: ")
     user_city_input = str(user_city_input).rstrip().lower()
     if user_city_input in CITY_DATA:
@@ -31,18 +34,18 @@ def get_filters():
             if user_city_input in CITY_DATA:
                 city = user_city_input
                 print("Great!")
-                
-    
+
+
     #Ask the user if there is a time filter needed to analyse the data
     date_filter_answer = input("\nDo you want to filter the data by \"Month\",\"day\" or not at all? Type \"None\" for no time filters: " )
-    date_filter_answer = str(date_filter_answer).rstrip().title()  
-    
+    date_filter_answer = str(date_filter_answer).rstrip().title()
+
     while date_filter_answer not in ("Month","Day","None"):
         new_answer = input("\Please choose one of the options Month, day or None (in case you don´t want any time filters): ")
         if str(new_answer).rstrip().title() in ("Month","Day","None"):
             date_filter_answer = str(new_answer).rstrip().title()
             break
-            
+
     # get user input for month (all, january, february, ... , june)
     if date_filter_answer == "Month":
         user_month_input = input("Please select a month between January and June. Type full month name: ")
@@ -51,11 +54,11 @@ def get_filters():
         if user_month_input in months:
             month = user_month_input
             day = "All"
-            print("Great, we can continue")   
+            print("Great, we can continue")
         else:
             while user_month_input not in months:
                 user_month_input = input("\nTry again, remember choose between January and June. Type full month name: ")
-                user_month_input = str(user_month_input).rstrip().title()    
+                user_month_input = str(user_month_input).rstrip().title()
                 if user_month_input in months:
                     month = user_month_input
                     day = "All"
@@ -74,19 +77,19 @@ def get_filters():
         else:
             while user_day_input not in days:
                 user_day_input = input("\nTry again, remember choose a day between Monday to Sunday, write the full day name: ")
-                user_day_input = str(user_day_input).rstrip().title()    
+                user_day_input = str(user_day_input).rstrip().title()
                 if user_day_input in days:
                     day = user_day_input
                     month = "All"
                     print("Great, we can continue")
                     break
-        
+
      # Do not filter the dataset by time
-    
+
     if date_filter_answer == "None":
         print(f"\n\tNo time filters will be applied to the {user_city_input} dataset")
         day = "All"
-        month = 'All' 
+        month = 'All'
 
     print('-'*40)
     return city, month, day
@@ -171,7 +174,7 @@ def station_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
@@ -190,8 +193,8 @@ def trip_duration_stats(df):
     print(f"mean_trip_time:{mean_trip_time}")
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
-    
+
+
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
@@ -210,7 +213,7 @@ def user_stats(df):
         print(count_user_gender)
     except KeyError:
         print("\nThis dataset does not contain any Gender information about the users")
-        
+
     # Display earliest, most recent, and most common year of birth
     try:
         earliest_birth_year  = df["Birth Year"].tail(1)
@@ -218,40 +221,40 @@ def user_stats(df):
         most_common_birth_year = df["Birth Year"].mode()[0]
     except KeyError:
         print("\nThis dataset does not contain any Birth Year information about the users")
-        
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 
 def individual_trip_data(df):
-    """Displays individual trip information for the dataset selected by the user. 
+    """Displays individual trip information for the dataset selected by the user.
     It will display only the first 5 trips, sorted by the column Start Time from the
-    Dataset created by the filters applied by the user in the get_filters function at 
+    Dataset created by the filters applied by the user in the get_filters function at
     the beginning of the program"""
-    
+
     total_trips = df["Start Station"].count()
-    print(f"\nYour dataset contains {total_trips} total individual trips") 
-    
+    print(f"\nYour dataset contains {total_trips} total individual trips")
+
     more_data_answer = input("Would you like to view details of the first 5 trips? yes or no: ")
     while str(more_data_answer).rstrip().lower() not in ("yes","no"):
             new_answer = input("Please type yes or no: ")
             if str(new_answer).rstrip().lower() in ("yes","no"):
                 more_data_answer = str(new_answer).rstrip().lower()
                 break
-                
+
     if str(more_data_answer).rstrip().lower() == "yes":
         print('\nSearching for individual trip data...\n')
         start_time = time.time()
         df = df.sort_values(by=["Start Time"])
         for i in range(4):
             print("\n","-"*40,"\n",df.rename(columns={"Unnamed: 0": "Trip Reference"}).iloc[i])
-            
-                
+
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-    
-    
+
+
 def main():
     while True:
         city, month, day = get_filters()
@@ -261,7 +264,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        
+
         #Asking the user if more detailed information is needed
         more_info=input("\n\nWould you like to view individual trip data related to your data selection? Type yes or no: ")
         while str(more_info).lower() not in ("yes","no"):
@@ -272,7 +275,7 @@ def main():
 
         if str(more_info).lower() == "yes":
             individual_trip_data(df)
-            
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
